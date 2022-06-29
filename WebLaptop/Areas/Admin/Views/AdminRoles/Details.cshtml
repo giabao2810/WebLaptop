@@ -1,0 +1,23 @@
+﻿@model WebLaptop.Models.Role
+
+@{
+    ViewData["Title"] = "Thông tin quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<h4>Thông tin quyền truy cập</h4>
+<table class="table table-hover no-margin">
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Tên quyền truy cập</td>
+            <td>@Model.RoleName</i></td>
+        </tr>
+        <tr>
+            <td>Mô tả</td>
+            <td>@Model.Desciption</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,59 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebLaptop.Models.Khachhang>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách khách hàng" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<<table class="table table-condensed">
+						<caption>Danh sách khách hàng : page @CurrentPage</caption>
+						<thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Họ và tên</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
+                                <th>Tỉnh/Thành</th>
+                                <th>#</th>
+                            </tr> 
+						</thead> 
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.FullName</td>
+                                <td>@item.Sdt</td>
+                                <td>@item.Email</td>
+                                <td>@item.Diachi</td>
+                                <td>@item.Location.Name</td>
+                                <td>
+                                    <a class="btn btn-info btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminKhachhangs" asp-action="Details" asp-route-id="@item.Id">View</a>
+                                    <a class="btn btn-primary btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminKhachhangs" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn btn-success btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminKhachhangs" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                                }
+                            }
+                        </tbody> 
+					</table>
+ <div class="row">
+     <div class="col-sm-5">
+         <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Page @CurrentPage</div>
+     </div>
+     <div class="col-sm-7">
+         <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+             <ul class="pagination">
+                 <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminKhachhangs" asp-action="Index"></pager>
+             </ul>
+         </div>
+     </div>
+ </div>
+

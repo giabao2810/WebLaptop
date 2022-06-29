@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebLaptop.Models.TaiKhoan>
+
+@{
+    ViewData["Title"] = "Danh sách tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div class="box-content"> 
+        <select class="custom-select" id="idrole" name="idrole" style="min-width=200px;" asp-items="ViewBag.QuyenTruyCap">
+            <option value="0" disabled selected>Chọn quyền truy cập</option>
+        </select>
+        <select class="custom-select" id="idstatus" name="idstatus" style="min-width=200px;" asp-items="ViewBag.IsTrangThai">
+            <option value="" disabled selected>Chọn trạng thái</option>
+        </select>
+
+        <!-- /.sub-menu -->
+  
+        <!-- /.dropdown js__dropdown -->
+        <table class="table table-striped margin-bottom-10 table-purchases">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Lần đăng nhập cuối</th>
+                    <th>Quyền truy cập</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model != null)
+                {
+                    foreach(var item in Model)
+                    {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Ten</td>
+                    <td>@item.Email</td>
+                    <td>@item.Sdt</td>
+                    <td>@item.Lastlogin</td>
+                    <td>@item.Role.Desciption</td>
+                    <td>
+                        @if (item.Trangthai)
+                        {
+                            <span class="notice notice-blue">Active</span>
+                        }
+                        else
+                        {
+                            <span class="notice notice-danger">Block</span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Details" asp-route-id="@item.Id">View</a>
+                        <a class="btn btn-primary btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-success btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>              
+                    }
+                }
+            </tbody>
+        </table>
+        <!-- /.table -->
+    </div>
+    <!-- /.box-content -->
+

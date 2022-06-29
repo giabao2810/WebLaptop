@@ -1,0 +1,38 @@
+﻿@model WebLaptop.Models.Role
+
+@{
+    ViewData["Title"] = "Xác nhận thông tin xóa";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h4>Xác nhận thông tin xóa</h4>
+<table class="table table-hover no-margin">
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Tên quyền truy cập</td>
+            <td>@Model.RoleName</i></td>
+        </tr>
+        <tr>
+            <td>Mô tả</td>
+            <td>@Model.Desciption</td>
+        </tr>
+        <tr>
+            <td>Xác nhận xóa</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@Model.Id">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Xác nhận xóa" class="btn btn-default" /> 
+                </form>
+            </td>
+            
+        </tr>
+    </tbody>
+</table>
+
+
+
