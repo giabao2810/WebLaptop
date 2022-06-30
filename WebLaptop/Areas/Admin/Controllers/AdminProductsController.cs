@@ -188,5 +188,31 @@ namespace WebLaptop.Areas.Admin.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
+
+        //GET :Seach/FindProduct
+        [HttpPost]
+        public IActionResult FindProduct(string keyword)
+        {
+            List<Product> ls = new List<Product>();
+            if(string.IsNullOrEmpty(keyword) || keyword.Length<1)
+            {
+                return PartialView("ListProductSearchPartial", null);
+            }
+            ls = _context.Products
+                                        .AsNoTracking()
+                                        .Include(a => a.Cat)
+                                        .Where(x => x.ProducName.Contains(keyword))
+                                        .OrderByDescending(x => x.ProducName)
+                                        .Take(10)
+                                        .ToList();
+            if(ls == null)
+            {
+                return PartialView("ListProductSearchPartial", null);
+            }
+            else
+            {
+                return PartialView("ListProductSearchPartial", null);
+            }
+        }
     }
 }
